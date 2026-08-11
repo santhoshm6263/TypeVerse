@@ -1,0 +1,293 @@
+/* Reset and Global Styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  user-select: none;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-color);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-neon);
+}
+
+:root {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Theme 1: Matrix Green */
+html[data-theme="matrix-green"], :root {
+  --bg-color: #060a06;
+  --card-bg: rgba(10, 20, 10, 0.65);
+  --primary-neon: #00ff41;
+  --secondary-neon: #008f11;
+  --text-color: #d2ffd2;
+  --text-muted: #4e7c4e;
+  --error-color: #ff3333;
+  --border-color: rgba(0, 255, 65, 0.25);
+  --glow-shadow: 0 0 10px rgba(0, 255, 65, 0.4), 0 0 20px rgba(0, 255, 65, 0.2);
+  --font-mono: 'Share Tech Mono', monospace;
+}
+
+/* Theme 2: Cyber Blue */
+html[data-theme="cyber-blue"] {
+  --bg-color: #030a16;
+  --card-bg: rgba(6, 18, 38, 0.65);
+  --primary-neon: #00f0ff;
+  --secondary-neon: #0072ff;
+  --text-color: #e0f8ff;
+  --text-muted: #3a688b;
+  --error-color: #ff2a74;
+  --border-color: rgba(0, 240, 255, 0.25);
+  --glow-shadow: 0 0 10px rgba(0, 240, 255, 0.4), 0 0 20px rgba(0, 240, 255, 0.2);
+  --font-mono: 'Share Tech Mono', monospace;
+}
+
+/* Theme 3: Neon Purple */
+html[data-theme="neon-purple"] {
+  --bg-color: #0a0414;
+  --card-bg: rgba(18, 8, 36, 0.65);
+  --primary-neon: #ff007f;
+  --secondary-neon: #9d00ff;
+  --text-color: #ffe8f4;
+  --text-muted: #6e4682;
+  --error-color: #00ffff;
+  --border-color: rgba(255, 0, 127, 0.25);
+  --glow-shadow: 0 0 10px rgba(255, 0, 127, 0.4), 0 0 20px rgba(255, 0, 127, 0.2);
+  --font-mono: 'Share Tech Mono', monospace;
+}
+
+/* Theme 4: Orange Sunset */
+html[data-theme="orange-sunset"] {
+  --bg-color: #0f0702;
+  --card-bg: rgba(28, 14, 4, 0.65);
+  --primary-neon: #ff6a00;
+  --secondary-neon: #ffbf00;
+  --text-color: #ffeedf;
+  --text-muted: #7e4620;
+  --error-color: #ff0055;
+  --border-color: rgba(255, 106, 0, 0.25);
+  --glow-shadow: 0 0 10px rgba(255, 106, 0, 0.4), 0 0 20px rgba(255, 106, 0, 0.2);
+  --font-mono: 'Share Tech Mono', monospace;
+}
+
+/* Theme 5: Red Hacker */
+html[data-theme="red-hacker"] {
+  --bg-color: #080101;
+  --card-bg: rgba(20, 4, 4, 0.65);
+  --primary-neon: #ff0000;
+  --secondary-neon: #8a0000;
+  --text-color: #ffdada;
+  --text-muted: #803030;
+  --error-color: #ffffff;
+  --border-color: rgba(255, 0, 0, 0.25);
+  --glow-shadow: 0 0 10px rgba(255, 0, 0, 0.4), 0 0 20px rgba(255, 0, 0, 0.2);
+  --font-mono: 'Share Tech Mono', monospace;
+}
+
+/* Theme 6: White Minimal */
+html[data-theme="white-minimal"] {
+  --bg-color: #fafafa;
+  --card-bg: rgba(255, 255, 255, 0.95);
+  --primary-neon: #18181b;
+  --secondary-neon: #71717a;
+  --text-color: #09090b;
+  --text-muted: #a1a1aa;
+  --error-color: #e11d48;
+  --border-color: #e4e4e7;
+  --glow-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --font-mono: 'Share Tech Mono', monospace;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Glassmorphism panel styling */
+.glass-panel {
+  background: var(--card-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--glow-shadow);
+  border-radius: 12px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-panel:hover {
+  border-color: rgba(255, 255, 255, 0.15) !important;
+}
+
+/* Interactive elements button styling */
+.cyber-button {
+  background: transparent;
+  color: var(--primary-neon);
+  border: 1px solid var(--primary-neon);
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.2s ease;
+  box-shadow: 0 0 5px rgba(var(--primary-neon), 0.1);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cyber-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: 0.5s;
+}
+
+.cyber-button:hover::before {
+  left: 100%;
+}
+
+.cyber-button:hover {
+  background: var(--primary-neon);
+  color: var(--bg-color);
+  box-shadow: var(--glow-shadow);
+  transform: translateY(-2px);
+}
+
+.cyber-button:active {
+  transform: translateY(0);
+}
+
+.cyber-button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* TextInput controls */
+.cyber-input {
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--border-color);
+  color: var(--text-color);
+  padding: 12px 16px;
+  border-radius: 6px;
+  font-size: 16px;
+  width: 100%;
+  transition: all 0.3s ease;
+}
+
+.cyber-input:focus {
+  outline: none;
+  border-color: var(--primary-neon);
+  box-shadow: var(--glow-shadow);
+}
+
+/* Scanning scanline overlay */
+.scanlines {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    rgba(18, 16, 16, 0) 50%, 
+    rgba(0, 0, 0, 0.2) 50%
+  ), linear-gradient(
+    90deg,
+    rgba(255, 0, 0, 0.03),
+    rgba(0, 255, 0, 0.01),
+    rgba(0, 0, 255, 0.03)
+  );
+  background-size: 100% 4px, 6px 100%;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+/* Header scan line sweep */
+@keyframes sweep {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100%); }
+}
+
+.scan-laser {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--primary-neon);
+  box-shadow: var(--glow-shadow);
+  opacity: 0.35;
+  animation: sweep 8s linear infinite;
+  pointer-events: none;
+}
+
+/* Typography styles */
+.cyber-title {
+  font-family: var(--font-mono);
+  font-size: 2.5rem;
+  font-weight: 900;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--text-color);
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+  position: relative;
+  display: inline-block;
+}
+
+.cyber-title span {
+  color: var(--primary-neon);
+  text-shadow: var(--glow-shadow);
+}
+
+/* Monospace stats panel */
+.mono-display {
+  font-family: var(--font-mono);
+}
+
+/* Toast animations */
+@keyframes slideIn {
+  from { transform: translateY(100px) scale(0.9); opacity: 0; }
+  to { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+.toast-achievement {
+  animation: slideIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+/* Custom cursor styling (optional/reduced motion friendly) */
+.custom-cursor {
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Crect width='12' height='12' fill='%2300ff41' opacity='0.7'/%3E%3C/svg%3E"), auto;
+}
+html[data-theme="white-minimal"] .custom-cursor {
+  cursor: auto;
+}

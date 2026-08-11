@@ -1,0 +1,87 @@
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id           String            @id @default(uuid())
+  email        String            @unique
+  username     String            @unique
+  passwordHash String
+  avatarUrl    String?
+  role         String            @default("user") // "user", "admin"
+  theme        String            @default("matrix-green")
+  settings     String            @default("{}") // JSON string for layout settings
+  createdAt    DateTime          @default(now())
+  updatedAt    DateTime          @updatedAt
+  testResults  TestResult[]
+  achievements UserAchievement[]
+  raceRooms    RaceRoom[]
+}
+
+model Text {
+  id         String     @id @default(uuid())
+  mode       String     // "words", "sentences", "paragraph", "numbers", "symbols"
+  difficulty String     // "easy", "medium", "hard"
+  content    String
+  language   String     @default("en")
+  createdAt  DateTime   @default(now())
+  raceRooms  RaceRoom[]
+}
+
+model TestResult {
+  id              String   @id @default(uuid())
+  userId          String?
+  user            User?    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  mode            String   // "words", "sentences", "paragraph", "numbers", "symbols", "custom"
+  difficulty      String   // "easy", "medium", "hard"
+  durationSeconds Int
+  wpm             Float
+  cpm             Float
+  accuracy        Float
+  mistakes        Int
+  correctWords    Int
+  incorrectWords  Int
+  backspaces      Int
+  charactersTyped Int
+  rawKeystrokeLog String   // JSON string containing keystrokes log
+  source          String   // "solo" or "multiplayer"
+  roomId          String?
+  createdAt       DateTime @default(now())
+}
+
+model Achievement {
+  id          String            @id @default(uuid())
+  key         String            @unique // e.g. "beginner", "fast_typer", "speed_master", "accuracy_king", "marathon_typer", "consistency_streak"
+  name        String
+  description String
+  icon        String
+  users       UserAchievement[]
+}
+
+model UserAchievement {
+  id            String      @id @default(uuid())
+  userId        String
+  user          User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  achievementId String
+  achievement   Achievement @relation(fields: [achievementId], references: [id], onDelete: Cascade)
+  unlockedAt    DateTime    @default(now())
+
+  @@unique([userId, achievementId])
+}
+
+model RaceRoom {
+  id         String    @id @default(uuid())
+  code       String    @unique
+  hostUserId String?
+  hostUser   User?     @relation(fields: [hostUserId], references: [id], onDelete: SetNull)
+  textId     String?
+  text       Text?     @relation(fields: [textId], references: [id], onDelete: SetNull)
+  status     String    @default("lobby") // "lobby", "racing", "finished"
+  createdAt  DateTime  @default(now())
+  finishedAt DateTime?
+}
